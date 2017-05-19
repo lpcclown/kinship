@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Detector" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2e-H9-hoK">
+                                <rect key="frame" x="7" y="16" width="352" height="282"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nwe-uq-xPC">
+                                <rect key="frame" x="41" y="294" width="117" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select 1st Photo"/>
+                                <connections>
+                                    <action selector="selectFirstPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2BX-wT-exM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUA-Dn-G8P">
+                                <rect key="frame" x="223" y="294" width="107" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Take 1st Photo"/>
+                                <connections>
+                                    <action selector="takeFirstPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gTY-cD-3Mk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dti-Ly-qTi">
+                                <rect key="frame" x="41" y="599" width="123" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Select 2nd Photo"/>
+                                <connections>
+                                    <action selector="selectSecondPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="e2w-3J-pQF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m2f-0e-MRk">
+                                <rect key="frame" x="223" y="599" width="107" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Take 2nd Photo"/>
+                                <connections>
+                                    <action selector="takeSecondPhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c7l-Cu-EnW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M5B-dj-gJn">
+                                <rect key="frame" x="43" y="629" width="110" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Compare Result"/>
+                                <connections>
+                                    <action selector="comparResult:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qfU-Zz-5wp"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4uS-Pr-J29">
+                                <rect key="frame" x="182" y="629" width="148" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Amh-Kg-vQD">
+                                <rect key="frame" x="7" y="320" width="352" height="282"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Photo" id="b7L-TZ-XLl"/>
+                    <connections>
+                        <outlet property="compareResultButton" destination="M5B-dj-gJn" id="Pnq-Jf-fDd"/>
+                        <outlet property="firstImageView" destination="L2e-H9-hoK" id="mWG-hO-5pe"/>
+                        <outlet property="personPic" destination="L2e-H9-hoK" id="oS6-Ul-dB6"/>
+                        <outlet property="secondImageView" destination="Amh-Kg-vQD" id="Bgm-gy-9EX"/>
+                        <outlet property="selectFirstPhotoButton" destination="nwe-uq-xPC" id="qp3-uP-Nlz"/>
+                        <outlet property="selectSecondPhotoButton" destination="dti-Ly-qTi" id="EaP-5g-UPh"/>
+                        <outlet property="takeFirstPhotoButton" destination="yUA-Dn-G8P" id="p5A-Mm-SN2"/>
+                        <outlet property="takeSecondPhotoButton" destination="m2f-0e-MRk" id="270-ig-m1t"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452" y="-359.37031484257875"/>
+        </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="uXy-LM-gbO">
+            <objects>
+                <viewController id="FHe-mm-V9Z" customClass="CameraViewController" customModule="Detector" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MFp-8p-hhG"/>
+                        <viewControllerLayoutGuide type="bottom" id="ynW-Gy-rCQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="TkN-B3-Vyb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Ik-iq-FXY">
+                                <rect key="frame" x="-19.5" y="-34.5" width="414" height="736"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="Sa9-uL-ycs"/>
+                                    <constraint firstAttribute="height" constant="736" id="sP8-ty-Qht"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="2Ik-iq-FXY" firstAttribute="centerX" secondItem="TkN-B3-Vyb" secondAttribute="centerX" id="D6Y-xu-WOR"/>
+                            <constraint firstItem="2Ik-iq-FXY" firstAttribute="centerY" secondItem="TkN-B3-Vyb" secondAttribute="centerY" id="X4Q-Ac-jLP"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="XqP-hE-7hv">
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="chx-1g-Ojn">
+                            <connections>
+                                <action selector="takePhoto:" destination="FHe-mm-V9Z" id="vns-2I-kk8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="2Ik-iq-FXY" id="ikg-mE-QIV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mTf-Ll-iIY" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1978" y="-359"/>
+        </scene>
+        <!--Camera-->
+        <scene sceneID="Cb4-xL-lNl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4aF-GE-jEW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Camera" id="PIB-0s-BQM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HzD-NT-OVQ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="FHe-mm-V9Z" kind="relationship" relationship="rootViewController" id="WCv-nV-LRe"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="M5S-eQ-KXA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1210" y="-359"/>
+        </scene>
+    </scenes>
+</document>
