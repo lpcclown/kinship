@@ -120,8 +120,12 @@ UINavigationControllerDelegate {
     
     @IBAction func comparResult(_ sender: Any) {
         
-        createRequest(userid: "abc", password: "password", email: "mail@cc.edu")
-        
+        if (flag == "secondPic"){
+            flag = "firstPic"}
+        createRequest(userid: "abc", password: "password", email: "mail@cc.edu", imageView: firstImageView)
+        if (flag == "firstPic"){
+            flag = "secondPic"}
+        createRequest(userid: "abc", password: "password", email: "mail@cc.edu", imageView: secondImageView)
     }
     /// Create request
     ///
@@ -131,7 +135,7 @@ UINavigationControllerDelegate {
     ///
     /// - returns:            The NSURLRequest that was created
     
-    func createRequest(userid: String, password: String, email: String) {
+    func createRequest(userid: String, password: String, email: String, imageView: UIImageView) {
         let parameters = [
             "user_id"  : userid,
             "email"    : email,
@@ -144,8 +148,10 @@ UINavigationControllerDelegate {
         request.httpMethod = "POST"
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         //let path1 = Bundle.main.path(forResource: "image1", ofType: "png")!
-        let imageData = UIImageJPEGRepresentation(firstImageView.image!, 1)
-        if (imageData == nil) {print("tttttttt")}
+        print ( detect())
+        let imageFacePart = cropImage(image: imageView.image!, toRect: detect())
+        let imageData = UIImageJPEGRepresentation(imageFacePart!, 1)
+        if (imageData == nil) {print("The image is nil, please check.")}
         request.httpBody = createBody(with: parameters, filePathKey: "file", imageDataKey: imageData! as NSData, boundary: boundary) as Data
         let task = URLSession.shared.dataTask(with: request){ data, response, error in
             guard let data = data, error == nil else {
@@ -243,7 +249,7 @@ UINavigationControllerDelegate {
     
     
     
-    func detect() {
+    func detect() -> CGRect{
         
         if (flag == "firstPic"){
             personPic = firstImageView;
@@ -253,7 +259,7 @@ UINavigationControllerDelegate {
         }
         
         guard let personciImage = CIImage(image: personPic.image!) else {
-            return
+            return CGRect(x:0,y:0,width:0,height:0)
         }
         
         let accuracy = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
@@ -299,7 +305,18 @@ UINavigationControllerDelegate {
             if face.hasRightEyePosition {
                 print("Right eye bounds are \(face.rightEyePosition)")
             }
+            //return faceViewBounds
+            return face.bounds.applying(transform)
         }
+        //return faces![0].bounds
+        return CGRect(x: 0,y: 0,width: 1, height: 1)
     }
     
+    
+    func cropImage(image: UIImage, toRect: CGRect) -> UIImage? {
+        let cgImage : CGImage! = image.cgImage
+        let croppedCGImage : CGImage! = cgImage.cropping(to: toRect)
+        
+        return UIImage(cgImage: croppedCGImage)
+    }
 }
