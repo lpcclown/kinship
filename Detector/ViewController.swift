@@ -37,10 +37,13 @@ UINavigationControllerDelegate {
     @IBOutlet weak var compareResultButton: UIButton!
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondImageView: UIImageView!
+    @IBOutlet weak var getResultButton: UIButton!
+    @IBOutlet weak var resultText: UITextField!
     
     var flag = "";
     
     var imagePicker = UIImagePickerController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -149,7 +152,8 @@ UINavigationControllerDelegate {
         request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         //let path1 = Bundle.main.path(forResource: "image1", ofType: "png")!
         print ( detect())
-        let imageFacePart = cropImage(image: imageView.image!, toRect: detect())
+        var imageFacePart = cropImage(image: imageView.image!, toRect: detect())
+        imageFacePart = reziseImage(image: imageFacePart!, newWidth: 64)
         let imageData = UIImageJPEGRepresentation(imageFacePart!, 1)
         if (imageData == nil) {print("The image is nil, please check.")}
         request.httpBody = createBody(with: parameters, filePathKey: "file", imageDataKey: imageData! as NSData, boundary: boundary) as Data
@@ -319,4 +323,74 @@ UINavigationControllerDelegate {
         
         return UIImage(cgImage: croppedCGImage)
     }
+    
+    func reziseImage(image: UIImage, newWidth: CGFloat) -> UIImage{
+        
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSize(width: newWidth, height: newHeight))
+        image.draw(in: CGRect(x: 0, y:0 , width: newWidth, height: newHeight))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage!
+    }
+    
+    
+    @IBAction func getResultFromServer(_ sender: Any) {
+        let parameters = [
+            "uuid"  : UIDevice.current.identifierForVendor!.uuidString
+            //"email"    : email,
+            ]  // build your dictionary however appropriate
+        
+        let boundary = generateBoundaryString()
+        
+        let url = URL(string: "http://104.55.84.205/getResult.php")!
+        var requestResult = URLRequest(url: url)
+        requestResult.httpMethod = "POST"
+        requestResult.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        requestResult.httpBody = createSimpleBody(with: parameters, filePathKey: "file", boundary: boundary) as Data
+        let task = URLSession.shared.dataTask(with: requestResult){ data, response, error in
+            guard let data = data, error == nil else {
+                print("error=\(String(describing: error))")
+                return
+            }
+            if let httpStatus = response as? HTTPURLResponse, httpStatus.statusCode != 200 {
+                print("statusCode should be 200, but is \(httpStatus.statusCode)")
+                print("response = \(String(describing: response))")
+            }
+            let responseString = String(data: data, encoding: .utf8)
+            print("responseString = \(String(describing: responseString))")
+            
+        }
+        task.resume()
+        self.resultText.text = responseString
+        
+    }
+    
+    func createSimpleBody(with parameters: [String: String]?, filePathKey: String, boundary: String) -> NSData {
+        var body = Data()
+        
+        if parameters != nil {
+            for (key, value) in parameters! {
+                body.append("--\(boundary)\r\n")
+                body.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+                body.append("\(value)\r\n")
+            }
+        }
+        //let url = URL(fileURLWithPath: path)
+        let filename = "user-profile.JPG"
+        //let data = try Data(contentsOf: url)
+        let mimetype = "image/jpg"
+        
+        body.append("--\(boundary)\r\n")
+        body.append("Content-Disposition: form-data; name=\"\(filePathKey)\"; filename=\"\(filename)\"\r\n")
+        body.append("Content-Type: \(mimetype)\r\n\r\n")
+        body.append("\r\n")
+        
+        body.append("--\(boundary)--\r\n")
+        return body as NSData
+    }
+
 }
